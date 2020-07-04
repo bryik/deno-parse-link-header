@@ -6,9 +6,10 @@ Yes, [there are already a number of Node.js packages for parsing link headers](h
 
 ## usage
 
+Use in Deno:
+
 ```js
-// TODO: Figure out how users could import this module.
-import { parseLinkHeader } from "...";
+import { parseLinkHeader } from "https://cdn.jsdelivr.net/gh/bryik/deno-parse-link-header@v0.1.0/parseLinkHeader.ts";
 
 const example = `<https://example.com>; msg1="preconnect" msg2=hello`;
 
@@ -16,6 +17,18 @@ const parsedLinkHeader = parseLinkHeader(example);
 
 console.log(parsedLinkHeader);
 // [{uri: "https://example.com", msg1: "preconnect", msg2: "hello"}]
+```
+
+Use in browser (import the ES Module `/dist/parseLinkHeader.bundle.js`):
+
+```html
+<script type="module">
+  import { parseLinkHeader } from "https://cdn.jsdelivr.net/gh/bryik/deno-parse-link-header@v0.1.0/dist/parseLinkHeader.bundle.js";
+
+  const linkHeader = `<https://example.com>; msg1="preconnect" msg2="hello"`;
+  console.log(parseLinkHeader(linkHeader));
+  // [{uri: "https://example.com", msg1: "preconnect", msg2: "hello"}]
+</script>
 ```
 
 ## development
