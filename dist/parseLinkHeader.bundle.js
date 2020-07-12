@@ -178,9 +178,12 @@ System.register("src/extractParameters", [], function (exports_3, context_3) {
     if (header === "") {
       return {};
     }
+    // Remove uri.
+    const uriPattern = /<(.+)>/m;
+    const headerWithoutUri = header.replace(uriPattern, "");
     // Extract parameters.
     const paramPattern = /(\w+)="?(\w+)"?/gm;
-    const paramMatches = header.matchAll(paramPattern);
+    const paramMatches = headerWithoutUri.matchAll(paramPattern);
     let params = {};
     for (let match of paramMatches) {
       const [_, key, value] = match;
@@ -196,7 +199,7 @@ System.register("src/extractParameters", [], function (exports_3, context_3) {
   };
 });
 System.register(
-  "src/parseLinkHeader",
+  "parseLinkHeader",
   ["src/extractLinks", "src/extractUri", "src/extractParameters"],
   function (exports_4, context_4) {
     "use strict";
@@ -207,7 +210,7 @@ System.register(
      * @param header For example: `<https://example.com>; msg1="preconnect" msg2=hello`
      * @returns e.g. {uri: "https://example.com", msg1: "preconnect", msg2: "hello"},
      */
-    function _parseOneLinkHeader(header) {
+    function parseOneLinkHeader(header) {
       const uri = extractUri_ts_1.extractUri(header);
       const parameters = extractParameters_ts_1.extractParameters(header);
       return { uri, ...parameters };
@@ -228,7 +231,7 @@ System.register(
       // Break into separate Link headers.
       const linkHeaders = extractLinks_ts_1.extractLinks(header);
       // Parse each Link header.
-      const parsedLinks = linkHeaders.map(_parseOneLinkHeader);
+      const parsedLinks = linkHeaders.map(parseOneLinkHeader);
       return parsedLinks;
     }
     exports_4("parseLinkHeader", parseLinkHeader);
@@ -249,25 +252,6 @@ System.register(
     };
   },
 );
-System.register(
-  "mod",
-  ["src/parseLinkHeader"],
-  function (exports_5, context_5) {
-    "use strict";
-    var __moduleName = context_5 && context_5.id;
-    return {
-      setters: [
-        function (parseLinkHeader_ts_1_1) {
-          exports_5({
-            "parseLinkHeader": parseLinkHeader_ts_1_1["parseLinkHeader"],
-          });
-        },
-      ],
-      execute: function () {
-      },
-    };
-  },
-);
 
-const __exp = __instantiate("mod");
+const __exp = __instantiate("parseLinkHeader");
 export const parseLinkHeader = __exp["parseLinkHeader"];
