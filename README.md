@@ -56,7 +56,7 @@ deno test
 ### building `/dist`
 
 ```bash
-deno bundle ./mod.ts ./dist/parseLinkHeader.bundle.js
+deno bundle ./parseLinkHeader.ts ./dist/parseLinkHeader.bundle.js
 ```
 
 ## resources
