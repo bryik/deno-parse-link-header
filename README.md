@@ -9,7 +9,7 @@ Yes, [there are already a number of Node.js packages for parsing link headers](h
 Use in Deno:
 
 ```js
-import { parseLinkHeader } from "https://cdn.jsdelivr.net/gh/bryik/deno-parse-link-header@v0.1.0/parseLinkHeader.ts";
+import { parseLinkHeader } from "https://cdn.jsdelivr.net/gh/bryik/deno-parse-link-header@v0.1.1/parseLinkHeader.ts";
 
 const example = `<https://example.com>; msg1="preconnect" msg2=hello`;
 
@@ -23,7 +23,7 @@ Use in browser (import the ES Module `/dist/parseLinkHeader.bundle.js`):
 
 ```html
 <script type="module">
-  import { parseLinkHeader } from "https://cdn.jsdelivr.net/gh/bryik/deno-parse-link-header@v0.1.0/dist/parseLinkHeader.bundle.js";
+  import { parseLinkHeader } from "https://cdn.jsdelivr.net/gh/bryik/deno-parse-link-header@v0.1.1/dist/parseLinkHeader.bundle.js";
 
   const linkHeader = `<https://example.com>; msg1="preconnect" msg2="hello"`;
   console.log(parseLinkHeader(linkHeader));
